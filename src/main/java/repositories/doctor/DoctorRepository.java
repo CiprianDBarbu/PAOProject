@@ -8,7 +8,7 @@ import java.util.Optional;
 public interface DoctorRepository {
 
     enum Type{
-        DB, FILE, ARRAY
+        DB, FILE, LIST
     }
 
     void addDoctor(Doctor doctor);
@@ -17,9 +17,9 @@ public interface DoctorRepository {
 
     static DoctorRepository build(Type type){
         switch (type){
-            //TODO: case DB: return new DBDoctorRepository();
+            case DB: return new DBDoctorRepository();
             case FILE: return new FileDoctorRepository();
-            case ARRAY: return new ListDoctorRepository();
+            case LIST: return new ListDoctorRepository();
         }
         throw new RuntimeException("No such type!");
     }

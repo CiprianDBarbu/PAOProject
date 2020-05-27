@@ -1,7 +1,7 @@
-package repositories.medicine;
+package repositories.doctor;
 
 import managers.DBConnectionManager;
-import model.Medicine;
+import model.Doctor;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,18 +9,17 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Optional;
 
-public class DBMedicineRepository implements  MedicineRepository{
+public class DBDoctorRepository implements DoctorRepository {
     @Override
-    public void addMedicine(Medicine medicine) {
-
-        String sql = "INSERT INTO medicines VALUES(NULL,?,?)";
+    public void addDoctor(Doctor doctor) {
+        String sql = "INSERT INTO doctors VALUES (NULL,?,?,?)";
 
         try(
                 Connection con = DBConnectionManager.getInstance().createConnection();
                 PreparedStatement statement = con.prepareStatement(sql);
                 ){
-            statement.setString(1, medicine.getName());
-            statement.setFloat(2, medicine.getPrice());
+            statement.setString(1,doctor.getName());
+            statement.setInt(2,doctor.getAge());
 
             statement.executeUpdate();
         }catch (SQLException e){
@@ -29,30 +28,28 @@ public class DBMedicineRepository implements  MedicineRepository{
     }
 
     @Override
-    public Optional<Medicine> findMedicineByName(String name) {
-
-        String sql = "SELECT * FROM medicines WHERE name = ?";
-
+    public Optional<Doctor> findDoctorByName(String name) {
+        String sql = "SELECT * FROM doctors WHERE name = ?";
         try(
                 Connection con = DBConnectionManager.getInstance().createConnection();
                 PreparedStatement statement = con.prepareStatement(sql);
                 ){
-            statement.setString(1, name);
+            statement.setString(1,name);
 
             ResultSet set = statement.executeQuery();
 
             if(set.next()){
-                Medicine medicine = new Medicine();
-                medicine.setId(set.getInt("id"));
-                medicine.setName(set.getString("name"));
-                medicine.setPrice(set.getFloat("price"));
+                Doctor doctor = new Doctor();
+                doctor.setId(set.getInt("id"));
+                doctor.setName(set.getString("name"));
+                doctor.setAge(set.getInt("age"));
 
-                return  Optional.of(medicine);
+                return  Optional.of(doctor);
             }
+
         }catch (SQLException e){
             e.printStackTrace();
         }
-
         return Optional.empty();
     }
 }

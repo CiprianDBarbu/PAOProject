@@ -16,8 +16,8 @@ public interface SicknessRepository {
 
     static SicknessRepository build(Type type){
         switch (type){
-            //TODO: case DB: return new DBSicknessRepository();
-            //case FILE: return new FileSicknessRepository();
+            case DB: return new DBSicknessRepository();
+            case FILE: return new FileSicknessRepository();
             case LIST: return new ListSicknessRepository();
         }
         throw new RuntimeException("No such type!");

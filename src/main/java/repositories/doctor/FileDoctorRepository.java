@@ -37,11 +37,13 @@ public class FileDoctorRepository implements DoctorRepository{
             var list = Files.readAllLines(path);
             for (String u : list) {
                 String[] attr = u.split(",");
+
                 if (attr[1].equals(name)) {
                     doctor = new Doctor();
                     doctor.setId(Integer.parseInt(attr[0]));
                     doctor.setName(attr[1]);
                     doctor.setAge(Integer.parseInt(attr[2]));
+
                     break;
                 }
             }

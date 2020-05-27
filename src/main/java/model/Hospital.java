@@ -1,5 +1,7 @@
 package model;
 
+import repositories.sickness.ListSicknessRepository;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,10 +9,7 @@ public class Hospital {
 
     private int id;
     private  String name;
-
-    //private Doctor[] doctorList = new Doctor[100];
-
-    List<Doctor> doctorList = new ArrayList<>();    //isi creeaza lista de doctori cu cei care exista in repository
+    List<String> doctorList = new ArrayList<>();
 
     public int getId() {
         return id;
@@ -28,21 +27,21 @@ public class Hospital {
         this.name = name;
     }
 
-    /*
-    public Doctor[] getDoctorList() {
+    public List<String> getDoctorList() {
         return doctorList;
     }
 
-    public void setDoctorList(Doctor[] doctorList) {
+    public void setDoctorList(List<String> doctorList) {
         this.doctorList = doctorList;
     }
-    */
 
-    public List<Doctor> getDoctorList() {
-        return doctorList;
-    }
-
-    public void setDoctorList(List<Doctor> doctorList) {
-        this.doctorList = doctorList;
+    @Override
+    public String toString() {
+        String out = "";
+        out = id+","+ name;
+        for(String it : doctorList){
+            out += ","+it;
+        }
+        return out;
     }
 }

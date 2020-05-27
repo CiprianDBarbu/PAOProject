@@ -8,7 +8,7 @@ public class DBConnectionManager {
 
     public Connection createConnection() {
         try {
-            String url = "jdbc:mysql://127.0.0.1/mydb";
+            String url = "jdbc:mysql://localhost:3306/mydb";
             String username = "root";
             String password = "";
 
